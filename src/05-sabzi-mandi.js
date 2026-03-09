@@ -31,4 +31,42 @@
  */
 export function sabziMandiBill(shoppingList, priceList) {
   // Your code here
+
+  if(shoppingList.length === 0) return {
+    items: [],
+    totalBill: 0,
+  }
+
+  let items = [];
+  let totalBill = 0;
+
+
+  for(const sabzi of shoppingList){
+
+    const key = sabzi.name.replace(" ", "_");
+    const price = priceList[key]
+
+    if(price !== undefined && price <= 80) {
+      let cost = sabzi.qty * price;
+      
+     items.push({
+      name: sabzi.name,
+      qty: sabzi.qty,
+      cost: cost,
+     });
+
+     totalBill = totalBill + cost;
+    
 }
+  }
+
+return {
+  items,
+  totalBill
+}
+
+
+
+}
+
+console.log(sabziMandiBill([{ name: "aloo", qty: 2 }, { name: "shimla mirch", qty: 1 }], { aloo: 30, tamatar: 40, shimla_mirch: 90 }))
